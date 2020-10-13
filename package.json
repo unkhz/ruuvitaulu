@@ -1,18 +1,13 @@
 {
   "name": "ruuvitaulu",
   "version": "1.0.0",
+  "description": "Ruuvitag metrics",
   "main": "index.js",
+  "repository": "git@github.com:unkhz/ruuvitaulu.git",
+  "author": "Juhani Pelli <juhani.pelli@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "express": "^4.17.1",
-    "node-ruuvitag": "^4.6.1",
-    "prom-client": "^12.0.0"
-  },
-  "scripts": {
-    "dev": "nodemon index.js"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.5",
-    "prettier": "^2.1.2"
-  }
+  "private":  true,
+  "workspaces": [
+    "listener"
+  ]
 }
