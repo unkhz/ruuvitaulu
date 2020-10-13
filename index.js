@@ -1,23 +1,61 @@
 const ruuvi = require('node-ruuvitag')
-const { Registry, collectDefaultMetrics } = require('prom-client')
+const { register, Gauge } = require('prom-client')
 const express = require('express')
 const app = express()
 
 const config = { port: 3000 }
 
-const register = new Registry()
-collectDefaultMetrics({ register })
+const tags = new Map()
+const labelNames = ['tag']
+const gauges = {
+  temperature: new Gauge({
+    name: 'ruuvi_temperature',
+    help: 'Ruuvitags temperature measurement',
+    labelNames,
+  }),
+  humidity: new Gauge({
+    name: 'ruuvi_humidity',
+    help: 'Ruuvitags humidity measurement',
+    labelNames,
+  }),
+  pressure: new Gauge({
+    name: 'ruuvi_pressure',
+    help: 'Ruuvitags pressure measurement',
+    labelNames,
+  }),
+  battery: new Gauge({
+    name: 'ruuvi_battery',
+    help: 'Ruuvitags battery measurement',
+    labelNames,
+  }),
+}
 
 ruuvi.on('found', (tag) => {
-  console.log('Found RuuviTag, id: ' + tag.id)
-  tag.on('updated', (data) => {
-    console.log(
-      'Got data from RuuviTag ' +
-        tag.id +
-        ':\n' +
-        JSON.stringify(data, null, 's\t')
-    )
-  })
+  if (!tags.has(tag.id)) {
+    console.log(`Tag ${tag.id} found`)
+    tags.set(tag.id, tag)
+    tag.on('updated', (data) => {
+      const {
+        dataFormat,
+        rssi,
+        temperature,
+        humidity,
+        pressure,
+        accelerationX,
+        accelerationY,
+        accelerationZ,
+        battery,
+        txPower,
+        movementCounter,
+        measurementSequenceNumber,
+        mac,
+      } = data
+      gauges.temperature.labels(tag.id).set(temperature)
+      gauges.humidity.labels(tag.id).set(humidity)
+      gauges.pressure.labels(tag.id).set(pressure)
+      gauges.battery.labels(tag.id).set(battery)
+    })
+  }
 })
 
 ruuvi.on('warning', (message) => {
