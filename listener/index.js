@@ -1,12 +1,17 @@
+const path = require('path')
 const ruuvi = require('node-ruuvitag')
 const { register, Gauge } = require('prom-client')
 const express = require('express')
+const dotenv = require('dotenv')
+
+dotenv.config({ path: path.resolve(__dirname, '../.env') })
+
 const app = express()
 
 const config = { port: 3010 }
 
 const tags = new Map()
-const labelNames = ['tag']
+const labelNames = ['tag_id', 'tag']
 const gauges = {
   temperature: new Gauge({
     name: 'ruuvi_temperature',
@@ -30,10 +35,26 @@ const gauges = {
   }),
 }
 
+const knownTagNames = new Map(
+  process.env.KNOWN_TAGS?.split(',').map((entry) =>
+    entry.split(':').reverse()
+  ) || []
+)
+
 ruuvi.on('found', (tag) => {
-  if (!tags.has(tag.id)) {
-    console.log(`Tag ${tag.id} found`)
-    tags.set(tag.id, tag)
+  const tagId = tag.id
+  if (!tags.has(tagId)) {
+    const name = knownTagNames.get(tagId) || tagId
+    tags.set(tagId, {
+      id: tagId,
+      name,
+      tag,
+    })
+    if (name !== tagId) {
+      console.log(`Known tag ${name} (${tagId}) found`)
+    } else {
+      console.log(`Unknown tag ${tagId} found`)
+    }
     tag.on('updated', (data) => {
       const {
         dataFormat,
@@ -50,10 +71,10 @@ ruuvi.on('found', (tag) => {
         measurementSequenceNumber,
         mac,
       } = data
-      gauges.temperature.labels(tag.id).set(temperature)
-      gauges.humidity.labels(tag.id).set(humidity)
-      gauges.pressure.labels(tag.id).set(pressure)
-      gauges.battery.labels(tag.id).set(battery)
+      gauges.temperature.labels(tagId, name).set(temperature)
+      gauges.humidity.labels(tagId, name).set(humidity)
+      gauges.pressure.labels(tagId, name).set(pressure)
+      gauges.battery.labels(tagId, name).set(battery)
     })
   }
 })
