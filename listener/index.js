@@ -3,7 +3,7 @@ const { register, Gauge } = require('prom-client')
 const express = require('express')
 const app = express()
 
-const config = { port: 3000 }
+const config = { port: 3010 }
 
 const tags = new Map()
 const labelNames = ['tag']

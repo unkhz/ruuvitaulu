@@ -7,5 +7,5 @@ scrape_configs:
       - targets: ['prometheus:9090']
   - job_name: Ruuvi
     static_configs:
-      - targets: ['listener:3000']
+      - targets: ['host.docker.internal:3010']
   # Add other services here
