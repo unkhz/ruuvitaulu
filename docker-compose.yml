@@ -2,7 +2,7 @@ version: '3.8'
 services:
   prometheus:
     env_file: .env
-    container_name: prometheus
+    container_name: ruuvi_prometheus
     image: prom/prometheus
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
@@ -11,7 +11,7 @@ services:
 
   grafana:
     env_file: .env
-    container_name: grafana
+    container_name: ruuvi_grafana
     image: grafana/grafana
     volumes:
       - ./grafana/grafana.ini:/etc/grafana/grafana.ini
