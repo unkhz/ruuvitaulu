@@ -4,14 +4,15 @@ const { register, Gauge } = require('prom-client')
 const express = require('express')
 const dotenv = require('dotenv')
 
+const { getTag, getTagLabels, getLabelNames } = require('./lib/knownTags')
+
 dotenv.config({ path: path.resolve(__dirname, '../.env') })
 
 const app = express()
 
 const config = { port: 3010 }
 
-const tags = new Map()
-const labelNames = ['tag_id', 'tag']
+const labelNames = getLabelNames()
 const gauges = {
   temperature: new Gauge({
     name: 'ruuvi_temperature',
@@ -35,52 +36,39 @@ const gauges = {
   }),
 }
 
-const knownTagNames = new Map(
-  process.env.KNOWN_TAGS?.split(',').map((entry) =>
-    entry.split(':').reverse()
-  ) || []
-)
-
-ruuvi.on('found', (tag) => {
-  const tagId = tag.id
-  if (!tags.has(tagId)) {
-    const name = knownTagNames.get(tagId) || tagId
-    tags.set(tagId, {
-      id: tagId,
-      name,
-      tag,
-    })
-    if (name !== tagId) {
-      console.log(`Known tag ${name} (${tagId}) found`)
-    } else {
-      console.log(`Unknown tag ${tagId} found`)
-    }
-    tag.on('updated', (data) => {
-      const {
-        dataFormat,
-        rssi,
-        temperature,
-        humidity,
-        pressure,
-        accelerationX,
-        accelerationY,
-        accelerationZ,
-        battery,
-        txPower,
-        movementCounter,
-        measurementSequenceNumber,
-        mac,
-      } = data
-      gauges.temperature.labels(tagId, name).set(temperature)
-      gauges.humidity.labels(tagId, name).set(humidity)
-      gauges.pressure.labels(tagId, name).set(pressure)
-      gauges.battery.labels(tagId, name).set(battery)
-    })
+ruuvi.on('found', (stream) => {
+  const tag = getTag(stream)
+  if (tag.isKnown) {
+    console.log(`Known tag ${tag.name} found`)
+  } else {
+    console.log(`Unknown tag ${tag.name} found`)
   }
+  stream.on('updated', (data) => {
+    const {
+      dataFormat,
+      rssi,
+      temperature,
+      humidity,
+      pressure,
+      accelerationX,
+      accelerationY,
+      accelerationZ,
+      battery,
+      txPower,
+      movementCounter,
+      measurementSequenceNumber,
+      mac,
+    } = data
+    const labels = getTagLabels(tag)
+    gauges.temperature.labels(...labels).set(temperature)
+    gauges.humidity.labels(...labels).set(humidity)
+    gauges.pressure.labels(...labels).set(pressure)
+    gauges.battery.labels(...labels).set(battery)
+  })
 })
 
 ruuvi.on('warning', (message) => {
-  console.error(new Error(message))
+  console.warn(message)
 })
 
 app.get('/metrics', function (req, res) {
