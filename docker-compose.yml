@@ -1,8 +1,7 @@
-version: '3.8'
+version: '3'
 services:
   prometheus:
     env_file: .env
-    container_name: ruuvi_prometheus
     image: prom/prometheus
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
@@ -11,7 +10,6 @@ services:
 
   grafana:
     env_file: .env
-    container_name: ruuvi_grafana
     image: grafana/grafana
     volumes:
       - ./grafana/grafana.ini:/etc/grafana/grafana.ini
@@ -19,4 +17,4 @@ services:
       - ./grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
       - ./grafana/dashboards:/etc/grafana/provisioning/dashboards/dashboards
     ports:
-      - 3000:3000
+      - 80:3000
