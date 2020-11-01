@@ -1,182 +1,48 @@
 {
-  "annotations": {
-    "list": [
-      {
-        "builtIn": 1,
-        "datasource": "-- Grafana --",
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
-        "type": "dashboard"
-      }
-    ]
-  },
+  "annotations": {"list": [{"builtIn": 1, "datasource": "-- Grafana --", "enable": true, "hide": true, "iconColor": "rgba(0, 211, 255, 1)", "name": "Annotations & Alerts", "type": "dashboard"}]},
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
+  "iteration": 1604254556535,
   "links": [],
   "panels": [
     {
       "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null,
-            "filterable": false
-          },
+          "custom": {"align": null, "filterable": false},
           "mappings": [],
           "max": 5000,
           "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "green",
-                "value": 1000
-              }
-            ]
-          }
+          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "green", "value": 1000}]}
         },
         "overrides": []
       },
-      "gridPos": {
-        "h": 4,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
+      "gridPos": {"h": 4, "w": 19, "x": 0, "y": 0},
       "id": 6,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
+      "options": {"orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "showThresholdLabels": false, "showThresholdMarkers": true},
       "pluginVersion": "7.3.1",
-      "targets": [
-        {
-          "expr": "ruuvi_battery",
-          "interval": "",
-          "legendFormat": "{{name}}",
-          "refId": "A"
-        }
-      ],
+      "targets": [{"expr": "ruuvi_battery", "interval": "", "legendFormat": "{{name}}", "refId": "A"}],
       "timeFrom": null,
       "timeShift": null,
       "title": "Battery",
       "type": "gauge"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
       "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "unit": "degree"
-        },
+        "defaults": {"custom": {"align": null, "filterable": false}, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}},
         "overrides": []
       },
-      "fill": 1,
-      "fillGradient": 1,
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 4
-      },
-      "hiddenSeries": false,
-      "id": 2,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "sideWidth": 300,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
+      "gridPos": {"h": 4, "w": 5, "x": 19, "y": 0},
+      "id": 8,
+      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["mean"], "fields": "", "values": false}, "textMode": "auto"},
       "pluginVersion": "7.3.1",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "ruuvi_temperature",
-          "interval": "",
-          "legendFormat": "{{name}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
+      "targets": [{"expr": "avg(ruuvi_temperature{location='outside'})", "interval": "", "legendFormat": "", "queryType": "randomWalk", "refId": "A"}],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
-      "title": "Temperature",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:337",
-          "format": "degree",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:338",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "title": "Outside temp",
+      "type": "stat"
     },
     {
       "aliasColors": {},
@@ -184,41 +50,17 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "unit": "percent"
-        },
-        "overrides": []
-      },
+      "fieldConfig": {"defaults": {"custom": {}, "unit": "degree"}, "overrides": []},
       "fill": 1,
       "fillGradient": 1,
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 11
-      },
+      "gridPos": {"h": 7, "w": 24, "x": 0, "y": 4},
       "hiddenSeries": false,
-      "id": 3,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "sideWidth": 300,
-        "total": false,
-        "values": true
-      },
+      "id": 2,
+      "legend": {"alignAsTable": true, "avg": true, "current": true, "max": true, "min": true, "rightSide": true, "show": true, "sideWidth": 300, "total": false, "values": true},
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
+      "options": {"alertThreshold": true},
       "percentage": false,
       "pluginVersion": "7.3.1",
       "pointradius": 2,
@@ -228,56 +70,61 @@
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
-      "targets": [
-        {
-          "expr": "ruuvi_humidity",
-          "interval": "",
-          "legendFormat": "{{name}}",
-          "refId": "A"
-        }
+      "targets": [{"expr": "ruuvi_temperature{location=~'$location'}", "interval": "", "legendFormat": "{{name}}", "refId": "A"}],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Temperature",
+      "tooltip": {"shared": true, "sort": 0, "value_type": "individual"},
+      "type": "graph",
+      "xaxis": {"buckets": null, "mode": "time", "name": null, "show": true, "values": []},
+      "yaxes": [
+        {"$$hashKey": "object:337", "format": "degree", "label": null, "logBase": 1, "max": null, "min": null, "show": true},
+        {"$$hashKey": "object:338", "format": "short", "label": null, "logBase": 1, "max": null, "min": null, "show": true}
       ],
+      "yaxis": {"align": false, "alignLevel": null}
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fieldConfig": {"defaults": {"custom": {}, "unit": "percent"}, "overrides": []},
+      "fill": 1,
+      "fillGradient": 1,
+      "gridPos": {"h": 7, "w": 24, "x": 0, "y": 11},
+      "hiddenSeries": false,
+      "id": 3,
+      "legend": {"alignAsTable": true, "avg": true, "current": true, "max": true, "min": true, "rightSide": true, "show": true, "sideWidth": 300, "total": false, "values": true},
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {"alertThreshold": true},
+      "percentage": false,
+      "pluginVersion": "7.3.1",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [{"expr": "ruuvi_humidity{location=~'$location'}", "interval": "", "legendFormat": "{{name}}", "refId": "A"}],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
       "title": "Humidity",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
+      "tooltip": {"shared": true, "sort": 0, "value_type": "individual"},
       "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
+      "xaxis": {"buckets": null, "mode": "time", "name": null, "show": true, "values": []},
       "yaxes": [
-        {
-          "$$hashKey": "object:415",
-          "format": "percent",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:416",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
+        {"$$hashKey": "object:415", "format": "percent", "label": null, "logBase": 1, "max": null, "min": null, "show": true},
+        {"$$hashKey": "object:416", "format": "short", "label": null, "logBase": 1, "max": null, "min": null, "show": true}
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "yaxis": {"align": false, "alignLevel": null}
     },
     {
       "aliasColors": {},
@@ -285,41 +132,17 @@
       "dashLength": 6,
       "dashes": false,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "unit": "none"
-        },
-        "overrides": []
-      },
+      "fieldConfig": {"defaults": {"custom": {}, "unit": "none"}, "overrides": []},
       "fill": 1,
       "fillGradient": 1,
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 18
-      },
+      "gridPos": {"h": 7, "w": 24, "x": 0, "y": 18},
       "hiddenSeries": false,
       "id": 4,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": true,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "sideWidth": 300,
-        "total": false,
-        "values": true
-      },
+      "legend": {"alignAsTable": true, "avg": false, "current": true, "max": true, "min": true, "rightSide": true, "show": true, "sideWidth": 300, "total": false, "values": true},
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
+      "options": {"alertThreshold": true},
       "percentage": false,
       "pluginVersion": "7.3.1",
       "pointradius": 2,
@@ -329,72 +152,57 @@
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
-      "targets": [
-        {
-          "expr": "ruuvi_pressure",
-          "interval": "",
-          "legendFormat": "{{name}}",
-          "refId": "A"
-        }
-      ],
+      "targets": [{"expr": "ruuvi_pressure{location=~'$location'}", "interval": "", "legendFormat": "{{name}}", "refId": "A"}],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
       "title": "Pressure",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
+      "tooltip": {"shared": true, "sort": 0, "value_type": "individual"},
       "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
+      "xaxis": {"buckets": null, "mode": "time", "name": null, "show": true, "values": []},
       "yaxes": [
-        {
-          "$$hashKey": "object:271",
-          "format": "none",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:272",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
+        {"$$hashKey": "object:271", "format": "none", "label": null, "logBase": 1, "max": null, "min": null, "show": true},
+        {"$$hashKey": "object:272", "format": "short", "label": null, "logBase": 1, "max": null, "min": null, "show": true}
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "yaxis": {"align": false, "alignLevel": null}
     }
   ],
-  "refresh": "5s",
+  "refresh": "",
   "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": "",
+        "current": {"selected": true, "text": "inside", "value": "inside"},
+        "datasource": "Prometheus",
+        "definition": "label_values(location)",
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": false,
+        "name": "location",
+        "options": [],
+        "query": "label_values(location)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
-  "time": {
-    "from": "now-1h",
-    "to": "now"
-  },
+  "time": {"from": "now-12h", "to": "now"},
   "timepicker": {},
   "timezone": "",
   "title": "All ruuvitags",
   "uid": "A6XH6EcGk",
-  "version": 1
+  "version": 3
 }
