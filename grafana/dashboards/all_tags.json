@@ -3,7 +3,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1604254556535,
+  "iteration": 1604437172586,
   "links": [],
   "panels": [
     {
@@ -26,6 +26,7 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Battery",
+      "transparent": true,
       "type": "gauge"
     },
     {
@@ -36,12 +37,20 @@
       },
       "gridPos": {"h": 4, "w": 5, "x": 19, "y": 0},
       "id": 8,
-      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["mean"], "fields": "", "values": false}, "textMode": "auto"},
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
+        "textMode": "value"
+      },
       "pluginVersion": "7.3.1",
       "targets": [{"expr": "avg(ruuvi_temperature{location='outside'})", "interval": "", "legendFormat": "", "queryType": "randomWalk", "refId": "A"}],
       "timeFrom": null,
       "timeShift": null,
       "title": "Outside temp",
+      "transparent": true,
       "type": "stat"
     },
     {
@@ -59,7 +68,7 @@
       "legend": {"alignAsTable": true, "avg": true, "current": true, "max": true, "min": true, "rightSide": true, "show": true, "sideWidth": 300, "total": false, "values": true},
       "lines": true,
       "linewidth": 1,
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {"alertThreshold": true},
       "percentage": false,
       "pluginVersion": "7.3.1",
@@ -77,6 +86,7 @@
       "timeShift": null,
       "title": "Temperature",
       "tooltip": {"shared": true, "sort": 0, "value_type": "individual"},
+      "transparent": true,
       "type": "graph",
       "xaxis": {"buckets": null, "mode": "time", "name": null, "show": true, "values": []},
       "yaxes": [
@@ -100,7 +110,7 @@
       "legend": {"alignAsTable": true, "avg": true, "current": true, "max": true, "min": true, "rightSide": true, "show": true, "sideWidth": 300, "total": false, "values": true},
       "lines": true,
       "linewidth": 1,
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {"alertThreshold": true},
       "percentage": false,
       "pluginVersion": "7.3.1",
@@ -118,6 +128,7 @@
       "timeShift": null,
       "title": "Humidity",
       "tooltip": {"shared": true, "sort": 0, "value_type": "individual"},
+      "transparent": true,
       "type": "graph",
       "xaxis": {"buckets": null, "mode": "time", "name": null, "show": true, "values": []},
       "yaxes": [
@@ -141,7 +152,7 @@
       "legend": {"alignAsTable": true, "avg": false, "current": true, "max": true, "min": true, "rightSide": true, "show": true, "sideWidth": 300, "total": false, "values": true},
       "lines": true,
       "linewidth": 1,
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {"alertThreshold": true},
       "percentage": false,
       "pluginVersion": "7.3.1",
@@ -159,6 +170,7 @@
       "timeShift": null,
       "title": "Pressure",
       "tooltip": {"shared": true, "sort": 0, "value_type": "individual"},
+      "transparent": true,
       "type": "graph",
       "xaxis": {"buckets": null, "mode": "time", "name": null, "show": true, "values": []},
       "yaxes": [
@@ -176,7 +188,7 @@
     "list": [
       {
         "allValue": "",
-        "current": {"selected": true, "text": "inside", "value": "inside"},
+        "current": {"selected": false, "text": "All", "value": "$__all"},
         "datasource": "Prometheus",
         "definition": "label_values(location)",
         "error": null,
@@ -199,10 +211,10 @@
       }
     ]
   },
-  "time": {"from": "now-12h", "to": "now"},
+  "time": {"from": "now-7d", "to": "now"},
   "timepicker": {},
   "timezone": "",
   "title": "All ruuvitags",
   "uid": "A6XH6EcGk",
-  "version": 3
+  "version": 2
 }
