@@ -1,0 +1,395 @@
+{
+  "annotations": {"list": [{"builtIn": 1, "datasource": "-- Grafana --", "enable": true, "hide": true, "iconColor": "rgba(0, 211, 255, 1)", "name": "Annotations & Alerts", "type": "dashboard"}]},
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 3,
+  "iteration": 1604835647191,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 0},
+      "id": 11,
+      "panels": [],
+      "repeat": "metric",
+      "scopedVars": {"metric": {"selected": false, "text": "temperature", "value": "temperature"}},
+      "title": "$metric",
+      "type": "row"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Average  $metric for all $location tags",
+      "fieldConfig": {
+        "defaults": {"custom": {}, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
+        "overrides": []
+      },
+      "gridPos": {"h": 5, "w": 12, "x": 0, "y": 1},
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "7.3.1",
+      "repeat": "location",
+      "repeatDirection": "h",
+      "scopedVars": {"location": {"selected": false, "text": "inside", "value": "inside"}, "metric": {"selected": false, "text": "temperature", "value": "temperature"}},
+      "targets": [{"expr": "avg (ruuvi_$metric{location='$location'})", "instant": false, "interval": "", "legendFormat": "$location (avg)", "queryType": "randomWalk", "refId": "A"}],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Average  $metric for all $location tags",
+      "fieldConfig": {
+        "defaults": {"custom": {}, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
+        "overrides": []
+      },
+      "gridPos": {"h": 5, "w": 12, "x": 12, "y": 1},
+      "id": 15,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "7.3.1",
+      "repeatDirection": "h",
+      "repeatIteration": 1604835647191,
+      "repeatPanelId": 6,
+      "scopedVars": {"location": {"selected": false, "text": "outside", "value": "outside"}, "metric": {"selected": false, "text": "temperature", "value": "temperature"}},
+      "targets": [{"expr": "avg (ruuvi_$metric{location='$location'})", "instant": false, "interval": "", "legendFormat": "$location (avg)", "queryType": "randomWalk", "refId": "A"}],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Tag specific $metric",
+      "fieldConfig": {
+        "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
+        "overrides": []
+      },
+      "gridPos": {"h": 5, "w": 8, "x": 0, "y": 6},
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {"calcs": ["last"], "fields": "", "values": false},
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "7.3.1",
+      "repeat": "tag",
+      "scopedVars": {"metric": {"selected": false, "text": "temperature", "value": "temperature"}, "tag": {"selected": false, "text": "Makkari", "value": "Makkari"}},
+      "targets": [{"expr": "ruuvi_$metric{name=~'$tag'}", "interval": "", "legendFormat": "{{name}}", "queryType": "randomWalk", "refId": "A"}],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Tag specific $metric",
+      "fieldConfig": {
+        "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
+        "overrides": []
+      },
+      "gridPos": {"h": 5, "w": 8, "x": 8, "y": 6},
+      "id": 16,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {"calcs": ["last"], "fields": "", "values": false},
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "7.3.1",
+      "repeatIteration": 1604835647191,
+      "repeatPanelId": 2,
+      "scopedVars": {"metric": {"selected": false, "text": "temperature", "value": "temperature"}, "tag": {"selected": false, "text": "Olkkari", "value": "Olkkari"}},
+      "targets": [{"expr": "ruuvi_$metric{name=~'$tag'}", "interval": "", "legendFormat": "{{name}}", "queryType": "randomWalk", "refId": "A"}],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Tag specific $metric",
+      "fieldConfig": {
+        "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
+        "overrides": []
+      },
+      "gridPos": {"h": 5, "w": 8, "x": 16, "y": 6},
+      "id": 17,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {"calcs": ["last"], "fields": "", "values": false},
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "7.3.1",
+      "repeatIteration": 1604835647191,
+      "repeatPanelId": 2,
+      "scopedVars": {"metric": {"selected": false, "text": "temperature", "value": "temperature"}, "tag": {"selected": false, "text": "Terassi", "value": "Terassi"}},
+      "targets": [{"expr": "ruuvi_$metric{name=~'$tag'}", "interval": "", "legendFormat": "{{name}}", "queryType": "randomWalk", "refId": "A"}],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 11},
+      "id": 12,
+      "panels": [],
+      "repeatIteration": 1604835647191,
+      "repeatPanelId": 11,
+      "scopedVars": {"metric": {"selected": false, "text": "humidity", "value": "humidity"}},
+      "title": "$metric",
+      "type": "row"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Average  $metric for all $location tags",
+      "fieldConfig": {
+        "defaults": {"custom": {}, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
+        "overrides": []
+      },
+      "gridPos": {"h": 5, "w": 12, "x": 0, "y": 12},
+      "id": 13,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "7.3.1",
+      "repeat": "location",
+      "repeatDirection": "h",
+      "repeatIteration": 1604835647191,
+      "repeatPanelId": 6,
+      "repeatedByRow": true,
+      "scopedVars": {"location": {"selected": false, "text": "inside", "value": "inside"}, "metric": {"selected": false, "text": "humidity", "value": "humidity"}},
+      "targets": [{"expr": "avg (ruuvi_$metric{location='$location'})", "instant": false, "interval": "", "legendFormat": "$location (avg)", "queryType": "randomWalk", "refId": "A"}],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Average  $metric for all $location tags",
+      "fieldConfig": {
+        "defaults": {"custom": {}, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
+        "overrides": []
+      },
+      "gridPos": {"h": 5, "w": 12, "x": 12, "y": 12},
+      "id": 18,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "7.3.1",
+      "repeatDirection": "h",
+      "repeatIteration": 1604835647191,
+      "repeatPanelId": 13,
+      "repeatedByRow": true,
+      "scopedVars": {"location": {"selected": false, "text": "outside", "value": "outside"}, "metric": {"selected": false, "text": "humidity", "value": "humidity"}},
+      "targets": [{"expr": "avg (ruuvi_$metric{location='$location'})", "instant": false, "interval": "", "legendFormat": "$location (avg)", "queryType": "randomWalk", "refId": "A"}],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Tag specific $metric",
+      "fieldConfig": {
+        "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
+        "overrides": []
+      },
+      "gridPos": {"h": 5, "w": 8, "x": 0, "y": 17},
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {"calcs": ["last"], "fields": "", "values": false},
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "7.3.1",
+      "repeat": "tag",
+      "repeatIteration": 1604835647191,
+      "repeatPanelId": 2,
+      "repeatedByRow": true,
+      "scopedVars": {"metric": {"selected": false, "text": "humidity", "value": "humidity"}, "tag": {"selected": false, "text": "Makkari", "value": "Makkari"}},
+      "targets": [{"expr": "ruuvi_$metric{name=~'$tag'}", "interval": "", "legendFormat": "{{name}}", "queryType": "randomWalk", "refId": "A"}],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Tag specific $metric",
+      "fieldConfig": {
+        "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
+        "overrides": []
+      },
+      "gridPos": {"h": 5, "w": 8, "x": 8, "y": 17},
+      "id": 19,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {"calcs": ["last"], "fields": "", "values": false},
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "7.3.1",
+      "repeatIteration": 1604835647191,
+      "repeatPanelId": 14,
+      "repeatedByRow": true,
+      "scopedVars": {"metric": {"selected": false, "text": "humidity", "value": "humidity"}, "tag": {"selected": false, "text": "Olkkari", "value": "Olkkari"}},
+      "targets": [{"expr": "ruuvi_$metric{name=~'$tag'}", "interval": "", "legendFormat": "{{name}}", "queryType": "randomWalk", "refId": "A"}],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Tag specific $metric",
+      "fieldConfig": {
+        "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
+        "overrides": []
+      },
+      "gridPos": {"h": 5, "w": 8, "x": 16, "y": 17},
+      "id": 20,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {"calcs": ["last"], "fields": "", "values": false},
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "7.3.1",
+      "repeatIteration": 1604835647191,
+      "repeatPanelId": 14,
+      "repeatedByRow": true,
+      "scopedVars": {"metric": {"selected": false, "text": "humidity", "value": "humidity"}, "tag": {"selected": false, "text": "Terassi", "value": "Terassi"}},
+      "targets": [{"expr": "ruuvi_$metric{name=~'$tag'}", "interval": "", "legendFormat": "{{name}}", "queryType": "randomWalk", "refId": "A"}],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "stat"
+    }
+  ],
+  "schemaVersion": 26,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {"selected": true, "text": "All", "value": "$__all"},
+        "datasource": "Prometheus",
+        "definition": "label_values(location)",
+        "error": null,
+        "hide": 2,
+        "includeAll": true,
+        "label": null,
+        "multi": false,
+        "name": "location",
+        "options": [{"selected": true, "text": "All", "value": "$__all"}, {"selected": false, "text": "inside", "value": "inside"}, {"selected": false, "text": "outside", "value": "outside"}],
+        "query": "label_values(location)",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {"selected": true, "text": "All", "value": "$__all"},
+        "datasource": "Prometheus",
+        "definition": "label_values(name)",
+        "error": null,
+        "hide": 2,
+        "includeAll": true,
+        "label": null,
+        "multi": false,
+        "name": "tag",
+        "options": [
+          {"selected": true, "text": "All", "value": "$__all"},
+          {"selected": false, "text": "Makkari", "value": "Makkari"},
+          {"selected": false, "text": "Olkkari", "value": "Olkkari"},
+          {"selected": false, "text": "Terassi", "value": "Terassi"}
+        ],
+        "query": "label_values(name)",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {"selected": false, "text": "All", "value": "$__all"},
+        "error": null,
+        "hide": 2,
+        "includeAll": true,
+        "label": null,
+        "multi": false,
+        "name": "metric",
+        "options": [
+          {"selected": true, "text": "All", "value": "$__all"},
+          {"selected": false, "text": "temperature", "value": "temperature"},
+          {"selected": false, "text": "humidity", "value": "humidity"}
+        ],
+        "query": "temperature,humidity",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {"from": "now-1d", "to": "now"},
+  "timepicker": {"nowDelay": ""},
+  "timezone": "",
+  "title": "Quick look",
+  "uid": "F8ZsoPmgz",
+  "version": 29
+}
