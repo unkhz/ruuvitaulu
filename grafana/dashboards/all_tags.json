@@ -3,69 +3,23 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1604437172586,
+  "iteration": 1604836411276,
   "links": [],
   "panels": [
-    {
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {"align": null, "filterable": false},
-          "mappings": [],
-          "max": 5000,
-          "min": 0,
-          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "green", "value": 1000}]}
-        },
-        "overrides": []
-      },
-      "gridPos": {"h": 4, "w": 19, "x": 0, "y": 0},
-      "id": 6,
-      "options": {"orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "showThresholdLabels": false, "showThresholdMarkers": true},
-      "pluginVersion": "7.3.1",
-      "targets": [{"expr": "ruuvi_battery", "interval": "", "legendFormat": "{{name}}", "refId": "A"}],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Battery",
-      "transparent": true,
-      "type": "gauge"
-    },
-    {
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {"custom": {"align": null, "filterable": false}, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}},
-        "overrides": []
-      },
-      "gridPos": {"h": 4, "w": 5, "x": 19, "y": 0},
-      "id": 8,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "textMode": "value"
-      },
-      "pluginVersion": "7.3.1",
-      "targets": [{"expr": "avg(ruuvi_temperature{location='outside'})", "interval": "", "legendFormat": "", "queryType": "randomWalk", "refId": "A"}],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Outside temp",
-      "transparent": true,
-      "type": "stat"
-    },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
+      "decimals": 1,
       "fieldConfig": {"defaults": {"custom": {}, "unit": "degree"}, "overrides": []},
       "fill": 1,
       "fillGradient": 1,
-      "gridPos": {"h": 7, "w": 24, "x": 0, "y": 4},
+      "gridPos": {"h": 7, "w": 24, "x": 0, "y": 0},
       "hiddenSeries": false,
       "id": 2,
-      "legend": {"alignAsTable": true, "avg": true, "current": true, "max": true, "min": true, "rightSide": true, "show": true, "sideWidth": 300, "total": false, "values": true},
+      "legend": {"alignAsTable": true, "avg": true, "current": true, "max": true, "min": true, "rightSide": true, "show": true, "sideWidth": 320, "total": false, "values": true},
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "connected",
@@ -104,10 +58,10 @@
       "fieldConfig": {"defaults": {"custom": {}, "unit": "percent"}, "overrides": []},
       "fill": 1,
       "fillGradient": 1,
-      "gridPos": {"h": 7, "w": 24, "x": 0, "y": 11},
+      "gridPos": {"h": 7, "w": 24, "x": 0, "y": 7},
       "hiddenSeries": false,
       "id": 3,
-      "legend": {"alignAsTable": true, "avg": true, "current": true, "max": true, "min": true, "rightSide": true, "show": true, "sideWidth": 300, "total": false, "values": true},
+      "legend": {"alignAsTable": true, "avg": true, "current": true, "max": true, "min": true, "rightSide": true, "show": true, "sideWidth": 320, "total": false, "values": true},
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "connected",
@@ -146,10 +100,10 @@
       "fieldConfig": {"defaults": {"custom": {}, "unit": "none"}, "overrides": []},
       "fill": 1,
       "fillGradient": 1,
-      "gridPos": {"h": 7, "w": 24, "x": 0, "y": 18},
+      "gridPos": {"h": 7, "w": 24, "x": 0, "y": 14},
       "hiddenSeries": false,
       "id": 4,
-      "legend": {"alignAsTable": true, "avg": false, "current": true, "max": true, "min": true, "rightSide": true, "show": true, "sideWidth": 300, "total": false, "values": true},
+      "legend": {"alignAsTable": true, "avg": false, "current": true, "max": true, "min": true, "rightSide": true, "show": true, "sideWidth": 320, "total": false, "values": true},
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "connected",
@@ -178,9 +132,62 @@
         {"$$hashKey": "object:272", "format": "short", "label": null, "logBase": 1, "max": null, "min": null, "show": true}
       ],
       "yaxis": {"align": false, "alignLevel": null}
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {"align": null, "filterable": false},
+          "mappings": [],
+          "max": 5000,
+          "min": 0,
+          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "green", "value": 1000}]}
+        },
+        "overrides": []
+      },
+      "gridPos": {"h": 4, "w": 19, "x": 0, "y": 21},
+      "id": 6,
+      "options": {"orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "showThresholdLabels": false, "showThresholdMarkers": true},
+      "pluginVersion": "7.3.1",
+      "targets": [{"expr": "ruuvi_battery", "interval": "", "legendFormat": "{{name}}", "refId": "A"}],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Battery",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {"align": null, "filterable": false},
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]},
+          "unit": "degree"
+        },
+        "overrides": []
+      },
+      "gridPos": {"h": 4, "w": 5, "x": 19, "y": 21},
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
+        "textMode": "value"
+      },
+      "pluginVersion": "7.3.1",
+      "targets": [{"expr": "avg(ruuvi_temperature{location=~'$location'})", "interval": "", "legendFormat": "", "queryType": "randomWalk", "refId": "A"}],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Outside temp",
+      "transparent": true,
+      "type": "stat"
     }
   ],
-  "refresh": "",
+  "refresh": "5s",
   "schemaVersion": 26,
   "style": "dark",
   "tags": [],
@@ -211,10 +218,10 @@
       }
     ]
   },
-  "time": {"from": "now-7d", "to": "now"},
+  "time": {"from": "now-3d", "to": "now"},
   "timepicker": {},
   "timezone": "",
   "title": "All ruuvitags",
   "uid": "A6XH6EcGk",
-  "version": 2
+  "version": 7
 }
