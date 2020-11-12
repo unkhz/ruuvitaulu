@@ -19,6 +19,8 @@ services:
     image: grafana/grafana
     volumes:
       - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./grafana/server.crt:/etc/grafana/server.crt
+      - ./grafana/server.key:/etc/grafana/server.key
       - ./grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
       - ./grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
       - ./grafana/dashboards:/etc/grafana/provisioning/dashboards/dashboards
@@ -26,4 +28,4 @@ services:
     user: '1000'
     restart: always
     ports:
-      - 80:3000
+      - 443:3000
