@@ -12,14 +12,18 @@ const createTag = ({ id, name, labels }) => ({
   labels: labels || {},
 })
 
-try {
-  const tagConfigs = JSON.parse(fs.readFileSync(tagsPath).toString())
-  for (const tagConfig of tagConfigs) {
-    tags.set(tagConfig.id, createTag(tagConfig))
+const updateTags = () => {
+  try {
+    const tagConfigs = JSON.parse(fs.readFileSync(tagsPath).toString())
+    for (const tagConfig of tagConfigs) {
+      tags.set(tagConfig.id, createTag(tagConfig))
+    }
+  } catch (err) {
+    console.error(err)
   }
-} catch (err) {
-  throw err
 }
+updateTags()
+setInterval(updateTags, 5000)
 
 const getTag = ({ id }) => {
   const tag = tags.get(id) || createTag({ id })
