@@ -5,18 +5,17 @@ const tags = new Map()
 
 const tagsPath = path.resolve(__dirname, '../../tags.json')
 
-const createTag = ({ id, name, labels }) => ({
+const createTag = ({ id, isKnown = false, ...labels }) => ({
   id,
-  isKnown: name && name !== id,
-  name: name || id,
-  labels: labels || {},
+  isKnown,
+  ...labels,
 })
 
 const updateTags = () => {
   try {
     const tagConfigs = JSON.parse(fs.readFileSync(tagsPath).toString())
     for (const tagConfig of tagConfigs) {
-      tags.set(tagConfig.id, createTag(tagConfig))
+      tags.set(tagConfig.id, createTag({ ...tagConfig, isKnown: true }))
     }
   } catch (err) {
     console.error(err)
@@ -34,16 +33,14 @@ const getTag = ({ id }) => {
 const getTagLabels = (partialTag) => {
   const tag = getTag(partialTag)
   const labelNames = getLabelNames()
-  const labels = labelNames.map(
-    (labelName) => tag.labels[labelName] || tag[labelName]
-  )
+  const labels = labelNames.map((labelName) => tag[labelName])
   return labels
 }
 
 const getLabelNames = () => {
-  const labelNames = new Set(['id', 'name'])
+  const labelNames = new Set()
   for (const tag of tags.values()) {
-    for (const labelName of Object.keys(tag.labels)) {
+    for (const labelName of Object.keys(tag)) {
       labelNames.add(labelName)
     }
   }

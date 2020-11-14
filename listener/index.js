@@ -36,12 +36,12 @@ const gauges = {
   }),
 }
 
-ruuvi.on('found', (stream) => {
+const handleTagFound = (stream) => {
   const tag = getTag(stream)
   if (tag.isKnown) {
-    console.log(`Known tag ${tag.name} found`)
+    console.log(`Known tag ${tag.id}, ${tag.room}, ${tag.room_type} found`)
   } else {
-    console.log(`Unknown tag ${tag.name} found`)
+    console.log(`Unknown tag ${tag.id} found`)
   }
   stream.on('updated', (data) => {
     const {
@@ -65,6 +65,14 @@ ruuvi.on('found', (stream) => {
     gauges.pressure.labels(...labels).set(pressure)
     gauges.battery.labels(...labels).set(battery)
   })
+}
+
+ruuvi.on('found', (stream) => {
+  try {
+    handleTagFound(stream)
+  } catch (err) {
+    console.error(err)
+  }
 })
 
 ruuvi.on('warning', (message) => {

@@ -1,5 +1,9 @@
 # Ruuvitaulu
 
+Software omponents for creating a home weather station running for example with a Raspberry PI.
+
+## Setup
+
 Create .env file with following config
 
 ```
@@ -11,8 +15,13 @@ Create a `tags.json` file that defines the Ruuvi tags you know.
 
 ```
 [
-  {"id": "123467890abcdef1234567890abcdef0", "name": "Terassi", "labels": {"location": "outside"}},
-  {"id": "123467890abcdef1234567890abcdef1", "name": "Olkkari", "labels": {"location": "inside"}},
-  {"id": "123467890abcdef1234567890abcdef2", "name": "Makkari", "labels": {"location": "inside"}}
+  {"id": "a1b1c1d1", "room": "terassi", "room_type": "outside"},
+  {"id": "a1b1c1d2", "room": "olohuone", "room_type": "inside"},
+  {"id": "a1b1c1d3", "room": "makuuhuone", "room_type": "inside"}
 ]
 ```
+
+## Tips
+
+Think of tags (`id`) and their locations (`room`, `room_type`) as orthogonal dimensions. At some point you might want to replace one of the tags e.g. because it needs to be repaired. Tags can be replaced simply by keeping same `room` and `room_type` allowing the location specific graphs to be unbroken.
+s
