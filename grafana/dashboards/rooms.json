@@ -3,7 +3,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1604836411276,
+  "id": 5,
+  "iteration": 1605313988057,
   "links": [],
   "panels": [
     {
@@ -35,10 +36,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg by (shortid) (\n  label_replace((\n    ruuvi_temperature{location=~'$room_type'} or ruuvi_temperature{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
+          "expr": "avg by (room) (\n  label_replace((\n    ruuvi_temperature{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{shortid}}",
+          "legendFormat": "{{room}}",
           "refId": "A"
         }
       ],
@@ -70,7 +71,7 @@
       "legend": {"alignAsTable": true, "avg": true, "current": true, "max": true, "min": true, "rightSide": true, "show": true, "sideWidth": 320, "total": false, "values": true},
       "lines": true,
       "linewidth": 1,
-      "nullPointMode": "connected",
+      "nullPointMode": "null",
       "options": {"alertThreshold": true},
       "percentage": false,
       "pluginVersion": "7.3.1",
@@ -83,9 +84,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "max by (shortid) (\n  label_replace((\n    ruuvi_humidity{location=~'$room_type'} or ruuvi_humidity{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
+          "expr": "avg by (room) (\n  label_replace((\n    ruuvi_humidity{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
           "interval": "",
-          "legendFormat": "{{shortid}}",
+          "legendFormat": "{{room}}",
           "refId": "A"
         }
       ],
@@ -116,7 +117,7 @@
       "legend": {"alignAsTable": true, "avg": false, "current": true, "max": true, "min": true, "rightSide": true, "show": true, "sideWidth": 320, "total": false, "values": true},
       "lines": true,
       "linewidth": 1,
-      "nullPointMode": "connected",
+      "nullPointMode": "null",
       "options": {"alertThreshold": true},
       "percentage": false,
       "pluginVersion": "7.3.1",
@@ -129,9 +130,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "max by (shortid) (\n  label_replace((\n    ruuvi_pressure{location=~'$room_type'} or ruuvi_pressure{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
+          "expr": "avg by (room) (\n  label_replace(ruuvi_pressure{room_type=~'$room_type'}, 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*')\n)",
           "interval": "",
-          "legendFormat": "{{shortid}}",
+          "legendFormat": "{{room}}",
           "refId": "A"
         }
       ],
@@ -146,59 +147,6 @@
       "xaxis": {"buckets": null, "mode": "time", "name": null, "show": true, "values": []},
       "yaxes": [{"format": "none", "label": null, "logBase": 1, "max": null, "min": null, "show": true}, {"format": "short", "label": null, "logBase": 1, "max": null, "min": null, "show": true}],
       "yaxis": {"align": false, "alignLevel": null}
-    },
-    {
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {"align": null, "filterable": false},
-          "mappings": [],
-          "max": 5000,
-          "min": 0,
-          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "green", "value": 1000}]}
-        },
-        "overrides": []
-      },
-      "gridPos": {"h": 4, "w": 19, "x": 0, "y": 21},
-      "id": 6,
-      "options": {"orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "showThresholdLabels": false, "showThresholdMarkers": true},
-      "pluginVersion": "7.3.1",
-      "targets": [{"expr": "ruuvi_battery", "interval": "", "legendFormat": "{{name}}", "refId": "A"}],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Battery",
-      "transparent": true,
-      "type": "gauge"
-    },
-    {
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {"align": null, "filterable": false},
-          "decimals": 1,
-          "mappings": [],
-          "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]},
-          "unit": "degree"
-        },
-        "overrides": []
-      },
-      "gridPos": {"h": 4, "w": 5, "x": 19, "y": 21},
-      "id": 8,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "textMode": "value"
-      },
-      "pluginVersion": "7.3.1",
-      "targets": [{"expr": "avg(ruuvi_temperature{location=~'$location'})", "interval": "", "legendFormat": "", "queryType": "randomWalk", "refId": "A"}],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Outside temp",
-      "transparent": true,
-      "type": "stat"
     }
   ],
   "refresh": "",
@@ -209,7 +157,7 @@
     "list": [
       {
         "allValue": "",
-        "current": {"selected": false, "text": "undefined", "value": "undefined"},
+        "current": {"selected": false, "text": "All", "value": "$__all"},
         "datasource": "Prometheus",
         "definition": "label_values(location)",
         "error": null,
@@ -246,7 +194,7 @@
   "time": {"from": "now-6h", "to": "now"},
   "timepicker": {},
   "timezone": "",
-  "title": "All ruuvitags",
-  "uid": "A6XH6EcGk",
-  "version": 7
+  "title": "Käppyrät by room",
+  "uid": "d29bBGZRk",
+  "version": 9
 }
