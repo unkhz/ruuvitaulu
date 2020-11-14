@@ -1,3 +1,2 @@
-#!/bin/bash
-
-yarn dev
+#!/bin/sh
+node index.js

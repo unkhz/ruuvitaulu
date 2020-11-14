@@ -1,8 +1,14 @@
 version: '3'
 services:
+  listener:
+    build: ./listener
+    privileged: true
+    network_mode: host
+    entrypoint: 'bin/start.sh'
   prometheus:
     env_file: .env
     image: prom/prometheus
+    network_mode: host
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - ./prometheus/data:/data
@@ -17,6 +23,7 @@ services:
   grafana:
     env_file: .env
     image: grafana/grafana
+    network_mode: host
     volumes:
       - ./grafana/grafana.ini:/etc/grafana/grafana.ini
       - ./grafana/server.crt:/etc/grafana/server.crt
