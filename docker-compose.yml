@@ -2,9 +2,15 @@ version: '3'
 services:
   listener:
     build: ./listener
+    entrypoint: 'bin/start.sh'
     privileged: true
     network_mode: host
-    entrypoint: 'bin/start.sh'
+    ports:
+      - 22:22
+    volumes:
+      - /dev/tty.Bluetooth-Incoming-Port:/dev/tty.Bluetooth-Incoming-Port
+    environment:
+      - SSHPORT=22
   prometheus:
     env_file: .env
     image: prom/prometheus
