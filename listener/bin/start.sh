@@ -1,3 +1,5 @@
 #!/bin/bash
 
-yarn dev
+while true;  do
+  nodemon --exitcrash index.js
+done

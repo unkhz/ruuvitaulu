@@ -4,7 +4,7 @@ const { register, Gauge } = require('prom-client')
 const express = require('express')
 const dotenv = require('dotenv')
 
-const { getTag, getTagLabels, getLabelNames } = require('./lib/knownTags')
+const { getTag, getLabelNames } = require('./lib/knownTags')
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') })
 
@@ -13,66 +13,75 @@ const app = express()
 const config = { port: 3010 }
 
 const labelNames = getLabelNames()
+
+const createGauge = (metric) =>
+  new Gauge({
+    name: `ruuvi_${metric}`,
+    help: `Ruuvitag ${metric} measurement`,
+    labelNames,
+  })
+
 const gauges = {
-  temperature: new Gauge({
-    name: 'ruuvi_temperature',
-    help: 'Ruuvitags temperature measurement',
-    labelNames,
-  }),
-  humidity: new Gauge({
-    name: 'ruuvi_humidity',
-    help: 'Ruuvitags humidity measurement',
-    labelNames,
-  }),
-  pressure: new Gauge({
-    name: 'ruuvi_pressure',
-    help: 'Ruuvitags pressure measurement',
-    labelNames,
-  }),
-  battery: new Gauge({
-    name: 'ruuvi_battery',
-    help: 'Ruuvitags battery measurement',
-    labelNames,
-  }),
+  temperature: createGauge('temperature'),
+  humidity: createGauge('humidity'),
+  pressure: createGauge('pressure'),
+  battery: createGauge('battery'),
+  rssi: createGauge('rssi'),
+  measurementSequenceNumber: createGauge('measurement_count'),
+}
+
+const seenTagSetups = new Set()
+const maybeLogTagFound = (tagId, tag, labels) => {
+  const tagKey = `${tagId}-${tag.isKnown}`
+  const isSeen = seenTagSetups.has(tagKey)
+  if (!isSeen) {
+    if (tag.isKnown) {
+      console.log(`Found tag ${tagId} (${labels.room})`)
+    } else {
+      console.log(`Found tag ${tagId} (unknown)`)
+    }
+    seenTagSetups.add(tagKey)
+  }
+}
+
+const lastSeenLabelNames = new Set()
+const restartIfLabelsChanged = () => {
+  const hasLabels = lastSeenLabelNames.size > 0
+  const labelNames = getLabelNames()
+  if (hasLabels && labelNames.length !== lastSeenLabelNames.size) {
+    throw new Error(
+      `Labels added/removed ${labelNames.length} / ${lastSeenLabelNames.size}, forcing restart`
+    )
+  }
+  for (const labelName of labelNames) {
+    if (!hasLabels) {
+      lastSeenLabelNames.add(labelName)
+    } else {
+      if (!lastSeenLabelNames.has(labelName)) {
+        throw new Error('Label names changed, forcing restart')
+      }
+    }
+  }
 }
 
 const handleTagFound = (stream) => {
-  const tag = getTag(stream)
-  if (tag.isKnown) {
-    console.log(`Known tag ${tag.id}, ${tag.room}, ${tag.room_type} found`)
-  } else {
-    console.log(`Unknown tag ${tag.id} found`)
-  }
   stream.on('updated', (data) => {
-    const {
-      dataFormat,
-      rssi,
-      temperature,
-      humidity,
-      pressure,
-      accelerationX,
-      accelerationY,
-      accelerationZ,
-      battery,
-      txPower,
-      movementCounter,
-      measurementSequenceNumber,
-      mac,
-    } = data
-    const labels = getTagLabels(tag)
-    gauges.temperature.labels(...labels).set(temperature)
-    gauges.humidity.labels(...labels).set(humidity)
-    gauges.pressure.labels(...labels).set(pressure)
-    gauges.battery.labels(...labels).set(battery)
+    const id = data.mac.replace(/:/g, '').toLowerCase()
+    const tag = getTag(id, data)
+    maybeLogTagFound(id, tag, data)
+    restartIfLabelsChanged()
+    for (const [key, value] of Object.entries(data)) {
+      const gauge = gauges[key]
+      if (gauge) {
+        const labels = labelNames.map((name) => tag.labels[name])
+        gauge.labels(...labels).set(value)
+      }
+    }
   })
 }
 
 ruuvi.on('found', (stream) => {
-  try {
-    handleTagFound(stream)
-  } catch (err) {
-    console.error(err)
-  }
+  handleTagFound(stream)
 })
 
 ruuvi.on('warning', (message) => {

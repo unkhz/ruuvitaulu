@@ -2,18 +2,29 @@ const fs = require('fs')
 const path = require('path')
 
 const tags = new Map()
+const labelNames = new Set()
 
 const tagsPath = path.resolve(__dirname, '../../tags.json')
 
-const createTag = ({ id, isKnown = false, ...labels }) => ({
-  id,
+const createTag = ({ isKnown = false, ...labelsFromConfig }) => ({
+  id: labelsFromConfig.id,
   isKnown,
-  ...labels,
+  labels: Array.from(labelNames).map(
+    (labelName) => labelsFromConfig[labelName]
+  ),
 })
 
 const updateTags = () => {
   try {
     const tagConfigs = JSON.parse(fs.readFileSync(tagsPath).toString())
+
+    labelNames.clear()
+    for (const tagConfig of tagConfigs) {
+      for (const labelName of Object.keys(tagConfig)) {
+        labelNames.add(labelName)
+      }
+    }
+
     for (const tagConfig of tagConfigs) {
       tags.set(tagConfig.id, createTag({ ...tagConfig, isKnown: true }))
     }
@@ -24,31 +35,13 @@ const updateTags = () => {
 updateTags()
 setInterval(updateTags, 5000)
 
-const getTag = ({ id }) => {
+const getTag = (id, data) => {
   const tag = tags.get(id) || createTag({ id })
-  tags.set(tag.id, tag)
+  tags.set(id, { ...tag, id })
   return tag
-}
-
-const getTagLabels = (partialTag) => {
-  const tag = getTag(partialTag)
-  const labelNames = getLabelNames()
-  const labels = labelNames.map((labelName) => tag[labelName])
-  return labels
-}
-
-const getLabelNames = () => {
-  const labelNames = new Set()
-  for (const tag of tags.values()) {
-    for (const labelName of Object.keys(tag)) {
-      labelNames.add(labelName)
-    }
-  }
-  return Array.from(labelNames)
 }
 
 module.exports = {
   getTag,
-  getTagLabels,
-  getLabelNames,
+  getLabelNames: () => Array.from(labelNames),
 }
