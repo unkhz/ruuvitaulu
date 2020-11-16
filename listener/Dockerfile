@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:14-alpine
 
 COPY bin/ /opt/bin
 COPY lib/ /opt/lib
@@ -9,4 +9,4 @@ WORKDIR /opt/
 
 RUN apk add make alpine-sdk python3 libusb-dev eudev-dev bluez-dev linux-headers
 
-RUN npm install --production --frozen-lockfile
+RUN yarn install
