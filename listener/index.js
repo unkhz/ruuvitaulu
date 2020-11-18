@@ -14,17 +14,29 @@ const config = { port: 5010 }
 
 const labelNames = getLabelNames()
 
-const createGauge = (metric) =>
+const createGauge = (metric, help) =>
   new Gauge({
     name: `ruuvi_${metric}`,
-    help: `Ruuvitag ${metric} measurement`,
+    help: help ?? `Ruuvitag ${metric} measurement`,
     labelNames,
   })
 
 const gauges = {
   temperature: createGauge('temperature'),
+  temperature_calibration: createGauge(
+    'temperature_calibration',
+    'Ruuvitag temperature calibration offset'
+  ),
   humidity: createGauge('humidity'),
+  humidity_calibration: createGauge(
+    'humidity_calibration',
+    'Ruuvitag humidity calibration multiplier'
+  ),
   pressure: createGauge('pressure'),
+  pressure_calibration: createGauge(
+    'pressure_calibration',
+    'Ruuvitag pressure calibration offset'
+  ),
   battery: createGauge('battery'),
   rssi: createGauge('rssi'),
   measurementSequenceNumber: createGauge('measurement_count'),
@@ -70,10 +82,20 @@ const restartIfLabelsChanged = () => {
   }
 }
 
+const getAbsoluteCalibrationOffset = ({ target, measured } = {}) =>
+  (target ?? 1) - (measured ?? target ?? 1)
+const getRelativeCalibrationMultiplier = ({ target, measured } = {}) =>
+  (target ?? 1) / (measured ?? target ?? 1)
+
 const handleTagFound = (stream) => {
   stream.on('updated', (data) => {
     const id = data.mac.replace(/:/g, '').toLowerCase()
-    const tag = getTag(id, data)
+    const {
+      temperature_calibration = {},
+      humidity_calibration = {},
+      pressure_calibration = {},
+      ...tag
+    } = getTag(id, data)
     maybeLogTagFound(id, tag, data)
     restartIfLabelsChanged()
     for (const [key, value] of Object.entries(data)) {
@@ -82,6 +104,18 @@ const handleTagFound = (stream) => {
         gauge.labels(...tag.labels).set(value)
       }
     }
+
+    gauges.temperature_calibration
+      .labels(...tag.labels)
+      .set(getAbsoluteCalibrationOffset(temperature_calibration))
+
+    gauges.pressure_calibration
+      .labels(...tag.labels)
+      .set(getAbsoluteCalibrationOffset(pressure_calibration))
+
+    gauges.humidity_calibration
+      .labels(...tag.labels)
+      .set(getRelativeCalibrationMultiplier(humidity_calibration))
   })
 }
 

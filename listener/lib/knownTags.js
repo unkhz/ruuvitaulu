@@ -6,9 +6,10 @@ const labelNames = new Set()
 
 const tagsPath = path.resolve(__dirname, '../../tags.json')
 
-const createTag = ({ isKnown = false, ...labelsFromConfig }) => ({
+const createTag = ({ isKnown = false, calibration, ...labelsFromConfig }) => ({
   id: labelsFromConfig.id,
   isKnown,
+  calibration,
   labels: Array.from(labelNames).map(
     (labelName) => labelsFromConfig[labelName]
   ),
@@ -16,11 +17,23 @@ const createTag = ({ isKnown = false, ...labelsFromConfig }) => ({
 
 const updateTags = () => {
   try {
-    const tagConfigs = JSON.parse(fs.readFileSync(tagsPath).toString())
+    let tagConfigs = []
+    try {
+      tagConfigs = JSON.parse(fs.readFileSync(tagsPath).toString())
+    } catch (err) {
+      console.error('Failed importing tags.json', err)
+    }
 
     labelNames.clear()
     for (const tagConfig of tagConfigs) {
-      for (const labelName of Object.keys(tagConfig)) {
+      const {
+        // Omit known metric names from labels
+        temperature_calibration,
+        humidity_calibration,
+        pressure_calibration,
+        ...labels
+      } = tagConfig
+      for (const labelName of Object.keys(labels)) {
         labelNames.add(labelName)
       }
     }
