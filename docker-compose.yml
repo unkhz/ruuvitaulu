@@ -12,7 +12,7 @@ services:
     user: '1000'
     restart: always
     ports:
-      - 9090:9090
+      - 5090:9090
 
   grafana:
     env_file: .env
@@ -29,3 +29,4 @@ services:
     restart: always
     ports:
       - 443:3000
+      - 5000:3000

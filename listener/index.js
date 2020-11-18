@@ -10,7 +10,7 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') })
 
 const app = express()
 
-const config = { port: 3010 }
+const config = { port: 5010 }
 
 const labelNames = getLabelNames()
 
