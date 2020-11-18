@@ -6,10 +6,18 @@ const labelNames = new Set()
 
 const tagsPath = path.resolve(__dirname, '../../tags.json')
 
-const createTag = ({ isKnown = false, calibration, ...labelsFromConfig }) => ({
+const createTag = ({
+  isKnown = false,
+  temperature_calibration,
+  humidity_calibration,
+  pressure_calibration,
+  ...labelsFromConfig
+}) => ({
   id: labelsFromConfig.id,
   isKnown,
-  calibration,
+  temperature_calibration,
+  humidity_calibration,
+  pressure_calibration,
   labels: Array.from(labelNames).map(
     (labelName) => labelsFromConfig[labelName] ?? ''
   ),
