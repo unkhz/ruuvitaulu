@@ -31,14 +31,14 @@ const gauges = {
 }
 
 const seenTagSetups = new Set()
-const maybeLogTagFound = (tagId, tag, labels) => {
+const maybeLogTagFound = (tagId, tag, data) => {
   const tagKey = `${tagId}-${tag.isKnown}`
   const isSeen = seenTagSetups.has(tagKey)
   if (!isSeen) {
     if (tag.isKnown) {
-      console.log(`Found tag ${tagId} (${labels.room})`)
+      console.log(`Found tag ${tagId}:`, tag.labels)
     } else {
-      console.log(`Found tag ${tagId} (unknown)`)
+      console.log(`Found tag ${tagId}: unknown`)
     }
     seenTagSetups.add(tagKey)
   }
@@ -73,8 +73,7 @@ const handleTagFound = (stream) => {
     for (const [key, value] of Object.entries(data)) {
       const gauge = gauges[key]
       if (gauge) {
-        const labels = labelNames.map((name) => tag.labels[name])
-        gauge.labels(...labels).set(value)
+        gauge.labels(...tag.labels).set(value)
       }
     }
   })
