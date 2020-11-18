@@ -11,7 +11,7 @@ const createTag = ({ isKnown = false, calibration, ...labelsFromConfig }) => ({
   isKnown,
   calibration,
   labels: Array.from(labelNames).map(
-    (labelName) => labelsFromConfig[labelName]
+    (labelName) => labelsFromConfig[labelName] ?? ''
   ),
 })
 
