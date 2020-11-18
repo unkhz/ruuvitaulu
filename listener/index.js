@@ -30,17 +30,23 @@ const gauges = {
   measurementSequenceNumber: createGauge('measurement_count'),
 }
 
-const seenTagSetups = new Set()
-const maybeLogTagFound = (tagId, tag, data) => {
-  const tagKey = `${tagId}-${tag.isKnown}`
-  const isSeen = seenTagSetups.has(tagKey)
+const seenTags = new Map()
+const maybeLogTagFound = (tagId, tag) => {
+  const isSeen = seenTags.has(tagId)
+  const tagSetup = JSON.stringify(tag)
   if (!isSeen) {
     if (tag.isKnown) {
       console.log(`Found tag ${tagId}:`, tag.labels)
     } else {
       console.log(`Found tag ${tagId}: unknown`)
     }
-    seenTagSetups.add(tagKey)
+    seenTags.set(tagId, tagSetup)
+    return
+  }
+
+  if (tagSetup !== seenTags.get(tagId)) {
+    console.log(`Tag changed ${tagId}:`, tag)
+    seenTags.set(tagId, tagSetup)
   }
 }
 
