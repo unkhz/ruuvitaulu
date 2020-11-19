@@ -3,8 +3,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 3,
-  "iteration": 1604835647191,
+  "id": 6,
+  "iteration": 1605813586509,
   "links": [],
   "panels": [
     {
@@ -25,7 +25,7 @@
         "defaults": {"custom": {}, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
         "overrides": []
       },
-      "gridPos": {"h": 5, "w": 12, "x": 0, "y": 1},
+      "gridPos": {"h": 5, "w": 7, "x": 0, "y": 1},
       "id": 6,
       "options": {
         "colorMode": "value",
@@ -36,38 +36,10 @@
         "textMode": "value_and_name"
       },
       "pluginVersion": "7.3.1",
-      "repeat": "room_type",
+      "repeat": null,
       "repeatDirection": "h",
-      "scopedVars": {"room_type": {"selected": false, "text": "inside", "value": "inside"}, "metric": {"selected": false, "text": "temperature", "value": "temperature"}},
-      "targets": [{"expr": "avg (ruuvi_$metric{room_type='$room_type'})", "instant": false, "interval": "", "legendFormat": "$room_type (avg)", "queryType": "randomWalk", "refId": "A"}],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "",
-      "type": "stat"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "Average  $metric for all $room_type tags",
-      "fieldConfig": {
-        "defaults": {"custom": {}, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
-        "overrides": []
-      },
-      "gridPos": {"h": 5, "w": 12, "x": 12, "y": 1},
-      "id": 15,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "textMode": "value_and_name"
-      },
-      "pluginVersion": "7.3.1",
-      "repeatDirection": "h",
-      "repeatIteration": 1604835647191,
-      "repeatPanelId": 6,
-      "scopedVars": {"room_type": {"selected": false, "text": "outside", "value": "outside"}, "metric": {"selected": false, "text": "temperature", "value": "temperature"}},
-      "targets": [{"expr": "avg (ruuvi_$metric{room_type='$room_type'})", "instant": false, "interval": "", "legendFormat": "$room_type (avg)", "queryType": "randomWalk", "refId": "A"}],
+      "scopedVars": {"metric": {"selected": false, "text": "temperature", "value": "temperature"}},
+      "targets": [{"expr": "avg (ruuvi_$metric{room_type='ulkotila'})", "instant": false, "interval": "", "legendFormat": "ulkona", "queryType": "randomWalk", "refId": "A"}],
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -80,7 +52,7 @@
         "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
         "overrides": []
       },
-      "gridPos": {"h": 5, "w": 8, "x": 0, "y": 6},
+      "gridPos": {"h": 5, "w": 17, "x": 7, "y": 1},
       "id": 2,
       "options": {
         "colorMode": "value",
@@ -92,62 +64,10 @@
       },
       "pluginVersion": "7.3.1",
       "repeat": "tag",
-      "scopedVars": {"metric": {"selected": false, "text": "temperature", "value": "temperature"}, "tag": {"selected": false, "text": "Makkari", "value": "Makkari"}},
-      "targets": [{"expr": "ruuvi_$metric{room=~'$room'}", "interval": "", "legendFormat": "{{room}}", "queryType": "randomWalk", "refId": "A"}],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "",
-      "type": "stat"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "Tag specific $metric",
-      "fieldConfig": {
-        "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
-        "overrides": []
-      },
-      "gridPos": {"h": 5, "w": 8, "x": 8, "y": 6},
-      "id": 16,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {"calcs": ["last"], "fields": "", "values": false},
-        "textMode": "value_and_name"
-      },
-      "pluginVersion": "7.3.1",
-      "repeatIteration": 1604835647191,
-      "repeatPanelId": 2,
-      "scopedVars": {"metric": {"selected": false, "text": "temperature", "value": "temperature"}, "tag": {"selected": false, "text": "Olkkari", "value": "Olkkari"}},
-      "targets": [{"expr": "ruuvi_$metric{room=~'$room'}", "interval": "", "legendFormat": "{{room}}", "queryType": "randomWalk", "refId": "A"}],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "",
-      "type": "stat"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "Tag specific $metric",
-      "fieldConfig": {
-        "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
-        "overrides": []
-      },
-      "gridPos": {"h": 5, "w": 8, "x": 16, "y": 6},
-      "id": 17,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {"calcs": ["last"], "fields": "", "values": false},
-        "textMode": "value_and_name"
-      },
-      "pluginVersion": "7.3.1",
-      "repeatIteration": 1604835647191,
-      "repeatPanelId": 2,
-      "scopedVars": {"metric": {"selected": false, "text": "temperature", "value": "temperature"}, "tag": {"selected": false, "text": "Terassi", "value": "Terassi"}},
-      "targets": [{"expr": "ruuvi_$metric{room=~'$room'}", "interval": "", "legendFormat": "{{room}}", "queryType": "randomWalk", "refId": "A"}],
+      "scopedVars": {"metric": {"selected": false, "text": "temperature", "value": "temperature"}},
+      "targets": [
+        {"expr": "avg by (room_type) (ruuvi_$metric{room_type!~'ulkotila||undefined|inside|outside'})", "interval": "", "legendFormat": "{{room_type}}", "queryType": "randomWalk", "refId": "A"}
+      ],
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -156,10 +76,10 @@
     {
       "collapsed": false,
       "datasource": null,
-      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 11},
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 6},
       "id": 12,
       "panels": [],
-      "repeatIteration": 1604835647191,
+      "repeatIteration": 1605813586509,
       "repeatPanelId": 11,
       "scopedVars": {"metric": {"selected": false, "text": "humidity", "value": "humidity"}},
       "title": "$metric",
@@ -167,74 +87,13 @@
     },
     {
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
-        "overrides": []
-      },
-      "gridPos": {"h": 5, "w": 8, "x": 0, "y": 12},
-      "id": 23,
-      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["mean"], "fields": "", "values": false}, "textMode": "auto"},
-      "pluginVersion": "7.3.1",
-      "repeat": "room_type",
-      "repeatIteration": 1605314033527,
-      "repeatPanelId": 21,
-      "repeatedByRow": true,
-      "scopedVars": {"metric": {"selected": false, "text": "humidity", "value": "humidity"}, "room_type": {"selected": false, "text": "inside", "value": "inside"}},
-      "targets": [{"expr": "avg by (room_type) (ruuvi_$metric{room_type='$room_type'})", "instant": false, "interval": "", "legendFormat": "{{room_type}}", "queryType": "randomWalk", "refId": "A"}],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "",
-      "type": "stat"
-    },
-    {
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
-        "overrides": []
-      },
-      "gridPos": {"h": 5, "w": 8, "x": 8, "y": 12},
-      "id": 30,
-      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["mean"], "fields": "", "values": false}, "textMode": "auto"},
-      "pluginVersion": "7.3.1",
-      "repeatIteration": 1605314033527,
-      "repeatPanelId": 23,
-      "repeatedByRow": true,
-      "scopedVars": {"metric": {"selected": false, "text": "humidity", "value": "humidity"}, "room_type": {"selected": false, "text": "outside", "value": "outside"}},
-      "targets": [{"expr": "avg by (room_type) (ruuvi_$metric{room_type='$room_type'})", "instant": false, "interval": "", "legendFormat": "{{room_type}}", "queryType": "randomWalk", "refId": "A"}],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "",
-      "type": "stat"
-    },
-    {
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
-        "overrides": []
-      },
-      "gridPos": {"h": 5, "w": 8, "x": 16, "y": 12},
-      "id": 31,
-      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["mean"], "fields": "", "values": false}, "textMode": "auto"},
-      "pluginVersion": "7.3.1",
-      "repeatIteration": 1605314033527,
-      "repeatPanelId": 23,
-      "repeatedByRow": true,
-      "scopedVars": {"metric": {"selected": false, "text": "humidity", "value": "humidity"}, "room_type": {"selected": false, "text": "undefined", "value": "undefined"}},
-      "targets": [{"expr": "avg by (room_type) (ruuvi_$metric{room_type='$room_type'})", "instant": false, "interval": "", "legendFormat": "{{room_type}}", "queryType": "randomWalk", "refId": "A"}],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "",
-      "type": "stat"
-    },
-    {
-      "datasource": "Prometheus",
       "description": "Average  $metric for all $room_type tags",
       "fieldConfig": {
-        "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
+        "defaults": {"custom": {}, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
         "overrides": []
       },
-      "gridPos": {"h": 5, "w": 6, "x": 0, "y": 17},
-      "id": 24,
+      "gridPos": {"h": 5, "w": 7, "x": 0, "y": 7},
+      "id": 13,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -244,13 +103,13 @@
         "textMode": "value_and_name"
       },
       "pluginVersion": "7.3.1",
-      "repeat": "room",
+      "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1605314033527,
+      "repeatIteration": 1605813586509,
       "repeatPanelId": 6,
       "repeatedByRow": true,
-      "scopedVars": {"metric": {"selected": false, "text": "humidity", "value": "humidity"}, "room": {"selected": false, "text": "makuuhuone", "value": "makuuhuone"}},
-      "targets": [{"expr": "avg by (room) (ruuvi_$metric{room=~'$room'})", "instant": false, "interval": "", "legendFormat": "{{room}}", "queryType": "randomWalk", "refId": "A"}],
+      "scopedVars": {"metric": {"selected": false, "text": "humidity", "value": "humidity"}},
+      "targets": [{"expr": "avg (ruuvi_$metric{room_type='ulkotila'})", "instant": false, "interval": "", "legendFormat": "ulkona", "queryType": "randomWalk", "refId": "A"}],
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -258,86 +117,30 @@
     },
     {
       "datasource": "Prometheus",
-      "description": "Average  $metric for all $room_type tags",
+      "description": "Tag specific $metric",
       "fieldConfig": {
         "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
         "overrides": []
       },
-      "gridPos": {"h": 5, "w": 6, "x": 6, "y": 17},
-      "id": 32,
+      "gridPos": {"h": 5, "w": 17, "x": 7, "y": 7},
+      "id": 14,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
-        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
+        "reduceOptions": {"calcs": ["last"], "fields": "", "values": false},
         "textMode": "value_and_name"
       },
       "pluginVersion": "7.3.1",
-      "repeatDirection": "h",
-      "repeatIteration": 1605314033527,
-      "repeatPanelId": 24,
+      "repeat": "tag",
+      "repeatIteration": 1605813586509,
+      "repeatPanelId": 2,
       "repeatedByRow": true,
-      "scopedVars": {"metric": {"selected": false, "text": "humidity", "value": "humidity"}, "room": {"selected": false, "text": "olohuone", "value": "olohuone"}},
-      "targets": [{"expr": "avg by (room) (ruuvi_$metric{room=~'$room'})", "instant": false, "interval": "", "legendFormat": "{{room}}", "queryType": "randomWalk", "refId": "A"}],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "",
-      "type": "stat"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "Average  $metric for all $room_type tags",
-      "fieldConfig": {
-        "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
-        "overrides": []
-      },
-      "gridPos": {"h": 5, "w": 6, "x": 12, "y": 17},
-      "id": 33,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "textMode": "value_and_name"
-      },
-      "pluginVersion": "7.3.1",
-      "repeatDirection": "h",
-      "repeatIteration": 1605314033527,
-      "repeatPanelId": 24,
-      "repeatedByRow": true,
-      "scopedVars": {"metric": {"selected": false, "text": "humidity", "value": "humidity"}, "room": {"selected": false, "text": "terassi", "value": "terassi"}},
-      "targets": [{"expr": "avg by (room) (ruuvi_$metric{room=~'$room'})", "instant": false, "interval": "", "legendFormat": "{{room}}", "queryType": "randomWalk", "refId": "A"}],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "",
-      "type": "stat"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "Average  $metric for all $room_type tags",
-      "fieldConfig": {
-        "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
-        "overrides": []
-      },
-      "gridPos": {"h": 5, "w": 6, "x": 18, "y": 17},
-      "id": 34,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "textMode": "value_and_name"
-      },
-      "pluginVersion": "7.3.1",
-      "repeatDirection": "h",
-      "repeatIteration": 1605314033527,
-      "repeatPanelId": 24,
-      "repeatedByRow": true,
-      "scopedVars": {"metric": {"selected": false, "text": "humidity", "value": "humidity"}, "room": {"selected": false, "text": "undefined", "value": "undefined"}},
-      "targets": [{"expr": "avg by (room) (ruuvi_$metric{room=~'$room'})", "instant": false, "interval": "", "legendFormat": "{{room}}", "queryType": "randomWalk", "refId": "A"}],
+      "scopedVars": {"metric": {"selected": false, "text": "humidity", "value": "humidity"}},
+      "targets": [
+        {"expr": "avg by (room_type) (ruuvi_$metric{room_type!~'ulkotila||undefined|inside|outside'})", "interval": "", "legendFormat": "{{room_type}}", "queryType": "randomWalk", "refId": "A"}
+      ],
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -426,10 +229,10 @@
       }
     ]
   },
-  "time": {"from": "now-1d", "to": "now"},
+  "time": {"from": "now-12h", "to": "now"},
   "timepicker": {"nowDelay": ""},
   "timezone": "",
-  "title": "Quick look",
-  "uid": "quick-look",
-  "version": 40
+  "title": "Home",
+  "uid": "Home",
+  "version": 8
 }
