@@ -3,7 +3,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1604836411276,
+  "id": null,
+  "iteration": 1605811716568,
   "links": [],
   "panels": [
     {
@@ -35,7 +36,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg by (shortid) (\n  label_replace((\n   E ruuvi_temperature{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
+          "expr": "avg by (shortid) (\n  label_replace((\n     ruuvi_temperature{room_type=~'$room_type'} - ruuvi_temperature_calibration{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
           "instant": false,
           "interval": "",
           "legendFormat": "{{shortid}}",
@@ -83,7 +84,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "max by (shortid) (\n  label_replace((\n    ruuvi_humidity{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
+          "expr": "max by (shortid) (\n  label_replace((\n    ruuvi_humidity{room_type=~'$room_type'} * ruuvi_humidity_calibration{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
           "interval": "",
           "legendFormat": "{{shortid}}",
           "refId": "A"
@@ -129,7 +130,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "max by (shortid) (\n  label_replace((\n     ruuvi_pressure{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
+          "expr": "max by (shortid) (\n  label_replace((\n     ruuvi_pressure{room_type=~'$room_type'} - ruuvi_pressure_calibration{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
           "interval": "",
           "legendFormat": "{{shortid}}",
           "refId": "A"
@@ -146,59 +147,6 @@
       "xaxis": {"buckets": null, "mode": "time", "name": null, "show": true, "values": []},
       "yaxes": [{"format": "none", "label": null, "logBase": 1, "max": null, "min": null, "show": true}, {"format": "short", "label": null, "logBase": 1, "max": null, "min": null, "show": true}],
       "yaxis": {"align": false, "alignLevel": null}
-    },
-    {
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {"align": null, "filterable": false},
-          "mappings": [],
-          "max": 5000,
-          "min": 0,
-          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "green", "value": 1000}]}
-        },
-        "overrides": []
-      },
-      "gridPos": {"h": 4, "w": 19, "x": 0, "y": 21},
-      "id": 6,
-      "options": {"orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "showThresholdLabels": false, "showThresholdMarkers": true},
-      "pluginVersion": "7.3.1",
-      "targets": [{"expr": "ruuvi_battery", "interval": "", "legendFormat": "{{name}}", "refId": "A"}],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Battery",
-      "transparent": true,
-      "type": "gauge"
-    },
-    {
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {"align": null, "filterable": false},
-          "decimals": 1,
-          "mappings": [],
-          "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]},
-          "unit": "degree"
-        },
-        "overrides": []
-      },
-      "gridPos": {"h": 4, "w": 5, "x": 19, "y": 21},
-      "id": 8,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "textMode": "value"
-      },
-      "pluginVersion": "7.3.1",
-      "targets": [{"expr": "avg(ruuvi_temperature{room_type=~'$room_type'})", "interval": "", "legendFormat": "", "queryType": "randomWalk", "refId": "A"}],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Outside temp",
-      "transparent": true,
-      "type": "stat"
     }
   ],
   "refresh": "",
@@ -209,7 +157,7 @@
     "list": [
       {
         "allValue": "",
-        "current": {"selected": false, "text": "undefined", "value": "undefined"},
+        "current": {"selected": true, "text": "All", "value": "$__all"},
         "datasource": "Prometheus",
         "definition": "label_values(room_type)",
         "error": null,
@@ -243,10 +191,9 @@
       }
     ]
   },
-  "time": {"from": "now-6h", "to": "now"},
+  "time": {"from": "now-7d", "to": "now"},
   "timepicker": {},
   "timezone": "",
   "title": "Käppyrät by tags",
-  "uid": "tags",
   "version": 7
 }
