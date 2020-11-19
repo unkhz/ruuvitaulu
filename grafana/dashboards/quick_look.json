@@ -20,7 +20,7 @@
     },
     {
       "datasource": "Prometheus",
-      "description": "Average  $metric for all $location tags",
+      "description": "Average  $metric for all $room_type tags",
       "fieldConfig": {
         "defaults": {"custom": {}, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
         "overrides": []
@@ -36,10 +36,10 @@
         "textMode": "value_and_name"
       },
       "pluginVersion": "7.3.1",
-      "repeat": "location",
+      "repeat": "room_type",
       "repeatDirection": "h",
-      "scopedVars": {"location": {"selected": false, "text": "inside", "value": "inside"}, "metric": {"selected": false, "text": "temperature", "value": "temperature"}},
-      "targets": [{"expr": "avg (ruuvi_$metric{location='$location'})", "instant": false, "interval": "", "legendFormat": "$location (avg)", "queryType": "randomWalk", "refId": "A"}],
+      "scopedVars": {"room_type": {"selected": false, "text": "inside", "value": "inside"}, "metric": {"selected": false, "text": "temperature", "value": "temperature"}},
+      "targets": [{"expr": "avg (ruuvi_$metric{room_type='$room_type'})", "instant": false, "interval": "", "legendFormat": "$room_type (avg)", "queryType": "randomWalk", "refId": "A"}],
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -47,7 +47,7 @@
     },
     {
       "datasource": "Prometheus",
-      "description": "Average  $metric for all $location tags",
+      "description": "Average  $metric for all $room_type tags",
       "fieldConfig": {
         "defaults": {"custom": {}, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
         "overrides": []
@@ -66,8 +66,8 @@
       "repeatDirection": "h",
       "repeatIteration": 1604835647191,
       "repeatPanelId": 6,
-      "scopedVars": {"location": {"selected": false, "text": "outside", "value": "outside"}, "metric": {"selected": false, "text": "temperature", "value": "temperature"}},
-      "targets": [{"expr": "avg (ruuvi_$metric{location='$location'})", "instant": false, "interval": "", "legendFormat": "$location (avg)", "queryType": "randomWalk", "refId": "A"}],
+      "scopedVars": {"room_type": {"selected": false, "text": "outside", "value": "outside"}, "metric": {"selected": false, "text": "temperature", "value": "temperature"}},
+      "targets": [{"expr": "avg (ruuvi_$metric{room_type='$room_type'})", "instant": false, "interval": "", "legendFormat": "$room_type (avg)", "queryType": "randomWalk", "refId": "A"}],
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -93,7 +93,7 @@
       "pluginVersion": "7.3.1",
       "repeat": "tag",
       "scopedVars": {"metric": {"selected": false, "text": "temperature", "value": "temperature"}, "tag": {"selected": false, "text": "Makkari", "value": "Makkari"}},
-      "targets": [{"expr": "ruuvi_$metric{name=~'$tag'}", "interval": "", "legendFormat": "{{name}}", "queryType": "randomWalk", "refId": "A"}],
+      "targets": [{"expr": "ruuvi_$metric{room=~'$room'}", "interval": "", "legendFormat": "{{room}}", "queryType": "randomWalk", "refId": "A"}],
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -120,7 +120,7 @@
       "repeatIteration": 1604835647191,
       "repeatPanelId": 2,
       "scopedVars": {"metric": {"selected": false, "text": "temperature", "value": "temperature"}, "tag": {"selected": false, "text": "Olkkari", "value": "Olkkari"}},
-      "targets": [{"expr": "ruuvi_$metric{name=~'$tag'}", "interval": "", "legendFormat": "{{name}}", "queryType": "randomWalk", "refId": "A"}],
+      "targets": [{"expr": "ruuvi_$metric{room=~'$room'}", "interval": "", "legendFormat": "{{room}}", "queryType": "randomWalk", "refId": "A"}],
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -147,7 +147,7 @@
       "repeatIteration": 1604835647191,
       "repeatPanelId": 2,
       "scopedVars": {"metric": {"selected": false, "text": "temperature", "value": "temperature"}, "tag": {"selected": false, "text": "Terassi", "value": "Terassi"}},
-      "targets": [{"expr": "ruuvi_$metric{name=~'$tag'}", "interval": "", "legendFormat": "{{name}}", "queryType": "randomWalk", "refId": "A"}],
+      "targets": [{"expr": "ruuvi_$metric{room=~'$room'}", "interval": "", "legendFormat": "{{room}}", "queryType": "randomWalk", "refId": "A"}],
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -228,7 +228,7 @@
     },
     {
       "datasource": "Prometheus",
-      "description": "Average  $metric for all $location tags",
+      "description": "Average  $metric for all $room_type tags",
       "fieldConfig": {
         "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
         "overrides": []
@@ -258,7 +258,7 @@
     },
     {
       "datasource": "Prometheus",
-      "description": "Average  $metric for all $location tags",
+      "description": "Average  $metric for all $room_type tags",
       "fieldConfig": {
         "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
         "overrides": []
@@ -287,7 +287,7 @@
     },
     {
       "datasource": "Prometheus",
-      "description": "Average  $metric for all $location tags",
+      "description": "Average  $metric for all $room_type tags",
       "fieldConfig": {
         "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
         "overrides": []
@@ -316,7 +316,7 @@
     },
     {
       "datasource": "Prometheus",
-      "description": "Average  $metric for all $location tags",
+      "description": "Average  $metric for all $room_type tags",
       "fieldConfig": {
         "defaults": {"custom": {}, "decimals": 1, "mappings": [], "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 80}]}, "unit": "none"},
         "overrides": []

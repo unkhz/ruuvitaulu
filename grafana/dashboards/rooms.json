@@ -159,7 +159,7 @@
         "allValue": "",
         "current": {"selected": false, "text": "All", "value": "$__all"},
         "datasource": "Prometheus",
-        "definition": "label_values(location)",
+        "definition": "label_values(room_type)",
         "error": null,
         "hide": 0,
         "includeAll": true,
@@ -167,7 +167,7 @@
         "multi": false,
         "name": "room_type",
         "options": [],
-        "query": "label_values(location)",
+        "query": "label_values(room_type)",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -195,6 +195,6 @@
   "timepicker": {},
   "timezone": "",
   "title": "Käppyrät by room",
-  "uid": "kappyrat-rooms",
+  "uid": "rooms",
   "version": 9
 }

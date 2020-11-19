@@ -1,0 +1,65 @@
+{
+  "annotations": {"list": [{"builtIn": 1, "datasource": "-- Grafana --", "enable": true, "hide": true, "iconColor": "rgba(0, 211, 255, 1)", "name": "Annotations & Alerts", "type": "dashboard"}]},
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 11,
+  "links": [],
+  "panels": [
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [{"from": "", "id": 1, "text": "", "to": "", "type": 1}],
+          "max": 0,
+          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "#EAB839", "value": -75}, {"color": "green", "value": -50}]},
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {"h": 11, "w": 24, "x": 0, "y": 0},
+      "id": 2,
+      "options": {"reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": true}, "showThresholdLabels": false, "showThresholdMarkers": true},
+      "pluginVersion": "7.3.1",
+      "targets": [{"expr": "sort_desc(ruuvi_rssi{room=''})", "instant": true, "interval": "", "legendFormat": "{{id}} {{room}}", "refId": "A"}],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Closest unknown tags",
+      "type": "gauge"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [{"from": "", "id": 1, "text": "", "to": "", "type": 1}],
+          "max": 0,
+          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "#EAB839", "value": -75}, {"color": "green", "value": -50}]},
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {"h": 10, "w": 24, "x": 0, "y": 11},
+      "id": 3,
+      "options": {"reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": true}, "showThresholdLabels": false, "showThresholdMarkers": true},
+      "pluginVersion": "7.3.1",
+      "targets": [{"expr": "sort_desc(ruuvi_rssi{room!=''})", "instant": true, "interval": "", "legendFormat": "{{id}} ({{room}})", "refId": "A"}],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Closest known tags",
+      "type": "gauge"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 26,
+  "style": "dark",
+  "tags": [],
+  "templating": {"list": []},
+  "time": {"from": "now-6h", "to": "now"},
+  "timepicker": {},
+  "timezone": "",
+  "title": "Identify tags",
+  "uid": "identify-tags",
+  "version": 5
+}

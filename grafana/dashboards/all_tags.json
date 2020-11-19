@@ -35,7 +35,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg by (shortid) (\n  label_replace((\n    ruuvi_temperature{location=~'$room_type'} or ruuvi_temperature{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
+          "expr": "avg by (shortid) (\n  label_replace((\n   E ruuvi_temperature{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
           "instant": false,
           "interval": "",
           "legendFormat": "{{shortid}}",
@@ -83,7 +83,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "max by (shortid) (\n  label_replace((\n    ruuvi_humidity{location=~'$room_type'} or ruuvi_humidity{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
+          "expr": "max by (shortid) (\n  label_replace((\n    ruuvi_humidity{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
           "interval": "",
           "legendFormat": "{{shortid}}",
           "refId": "A"
@@ -129,7 +129,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "max by (shortid) (\n  label_replace((\n    ruuvi_pressure{location=~'$room_type'} or ruuvi_pressure{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
+          "expr": "max by (shortid) (\n  label_replace((\n     ruuvi_pressure{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
           "interval": "",
           "legendFormat": "{{shortid}}",
           "refId": "A"
@@ -193,7 +193,7 @@
         "textMode": "value"
       },
       "pluginVersion": "7.3.1",
-      "targets": [{"expr": "avg(ruuvi_temperature{location=~'$location'})", "interval": "", "legendFormat": "", "queryType": "randomWalk", "refId": "A"}],
+      "targets": [{"expr": "avg(ruuvi_temperature{room_type=~'$room_type'})", "interval": "", "legendFormat": "", "queryType": "randomWalk", "refId": "A"}],
       "timeFrom": null,
       "timeShift": null,
       "title": "Outside temp",
@@ -211,7 +211,7 @@
         "allValue": "",
         "current": {"selected": false, "text": "undefined", "value": "undefined"},
         "datasource": "Prometheus",
-        "definition": "label_values(location)",
+        "definition": "label_values(room_type)",
         "error": null,
         "hide": 0,
         "includeAll": true,
@@ -219,7 +219,7 @@
         "multi": false,
         "name": "room_type",
         "options": [],
-        "query": "label_values(location)",
+        "query": "label_values(room_type)",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -247,6 +247,6 @@
   "timepicker": {},
   "timezone": "",
   "title": "Käppyrät by tags",
-  "uid": "kappyrat-tags",
+  "uid": "tags",
   "version": 7
 }
