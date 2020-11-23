@@ -39,7 +39,7 @@
       "repeat": null,
       "repeatDirection": "h",
       "scopedVars": {"metric": {"selected": false, "text": "temperature", "value": "temperature"}},
-      "targets": [{"expr": "avg (ruuvi_$metric{room_type='ulkotila'})", "instant": false, "interval": "", "legendFormat": "ulkona", "queryType": "randomWalk", "refId": "A"}],
+      "targets": [{"expr": "avg (ruuvi_${metric}{room_type='ulkotila'} - ruuvi_${metric}_calibration{room_type='ulkotila'})", "instant": false, "interval": "", "legendFormat": "ulkona", "queryType": "randomWalk", "refId": "A"}],
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -66,7 +66,7 @@
       "repeat": "tag",
       "scopedVars": {"metric": {"selected": false, "text": "temperature", "value": "temperature"}},
       "targets": [
-        {"expr": "avg by (room_type) (ruuvi_$metric{room_type!~'ulkotila||undefined|inside|outside'})", "interval": "", "legendFormat": "{{room_type}}", "queryType": "randomWalk", "refId": "A"}
+        {"expr": "avg by (room_type) (ruuvi_${metric}{room_type!~'ulkotila||undefined|inside|outside'} - ruuvi_${metric}_calibration{room_type!~'ulkotila||undefined|inside|outside'})", "interval": "", "legendFormat": "{{room_type}}", "queryType": "randomWalk", "refId": "A"}
       ],
       "timeFrom": null,
       "timeShift": null,
@@ -109,7 +109,7 @@
       "repeatPanelId": 6,
       "repeatedByRow": true,
       "scopedVars": {"metric": {"selected": false, "text": "humidity", "value": "humidity"}},
-      "targets": [{"expr": "avg (ruuvi_$metric{room_type='ulkotila'})", "instant": false, "interval": "", "legendFormat": "ulkona", "queryType": "randomWalk", "refId": "A"}],
+      "targets": [{"expr": "avg (ruuvi_${metric}{room_type='ulkotila'} * ruuvi_${metric}_calibbration{room_type='ulkotila'})", "instant": false, "interval": "", "legendFormat": "ulkona", "queryType": "randomWalk", "refId": "A"}],
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -139,7 +139,7 @@
       "repeatedByRow": true,
       "scopedVars": {"metric": {"selected": false, "text": "humidity", "value": "humidity"}},
       "targets": [
-        {"expr": "avg by (room_type) (ruuvi_$metric{room_type!~'ulkotila||undefined|inside|outside'})", "interval": "", "legendFormat": "{{room_type}}", "queryType": "randomWalk", "refId": "A"}
+        {"expr": "avg by (room_type) (ruuvi_${metric}{room_type!~'ulkotila||undefined|inside|outside'} * ruuvi_${metric}_calibration{room_type!~'ulkotila||undefined|inside|outside'})", "interval": "", "legendFormat": "{{room_type}}", "queryType": "randomWalk", "refId": "A"}
       ],
       "timeFrom": null,
       "timeShift": null,
