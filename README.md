@@ -14,8 +14,9 @@ GF_SECURITY_ADMIN_PASSWORD=<grafana password>
 ## Tag configuration
 
 1. Start the app by running `yarn start`.
-2. Go to http://localhost:5010/metrics and reload page until you see some measurements
-3. Create a `tags.json` file that defines the Ruuvi tags you know. You can use the `ruuvi_rssi` measurements to identify the tag ids by bringing them close to your machine and seeing which measurement changes.
+2. Go to the "Identify tags" dashboard (http://localhost:5000//d/identify-tags) and use the `ruuvi_rssi` measurements to identify the tag ids by bringing them close to your machine and seeing which measurement changes
+3. Create a `tags.json` file that defines the Ruuvi tags you have identified.
+4. Calibrate the tags by using the salt calibration method (https://blog.ruuvi.com/humidity-sensor-673c5b7636fc) and add the target/measured values to `tags.json`. Dashboards will start showing the calibrated values starting from the moment the `tags.json` file is saved with new measurements.
 
 ```
 [
