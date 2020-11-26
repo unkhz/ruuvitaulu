@@ -36,7 +36,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg by (room) (\n  label_replace((\n    ruuvi_temperature{room_type=~'$room_type'} - ruuvi_temperature_calibration{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
+          "expr": "avg by (room) (\n  label_replace((\n    ruuvi_temperature{room_type=~'$room_type'} + ruuvi_temperature_calibration{room_type=~'$room_type'}\n   ), 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*'\n  )\n)",
           "instant": false,
           "interval": "",
           "legendFormat": "{{room}}",
@@ -130,7 +130,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg by (room) (\n  label_replace(ruuvi_pressure{room_type=~'$room_type'} - ruuvi_pressure_calibration{room_type=~'$room_type'}, 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*')\n)",
+          "expr": "avg by (room) (\n  label_replace(ruuvi_pressure{room_type=~'$room_type'} + ruuvi_pressure_calibration{room_type=~'$room_type'}, 'shortid', \"$1\", 'id', '([a-z0-9]{$shortid_length}).*')\n)",
           "interval": "",
           "legendFormat": "{{room}}",
           "refId": "A"
