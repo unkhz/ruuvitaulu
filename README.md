@@ -1,6 +1,6 @@
 # Ruuvitaulu
 
-Software omponents for creating a home weather station running for example with a Raspberry PI.
+Software omponents for creating a home weather station using [Ruuvi wireless sensors](https://ruuvi.com/).
 
 ## Setup
 
