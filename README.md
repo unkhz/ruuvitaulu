@@ -2,6 +2,12 @@
 
 Software omponents for creating a home weather station using [Ruuvi wireless sensors](https://ruuvi.com/).
 
+## Install
+
+Ensure you have nodejs version 14. The @bandonware/noble package is not maintained well and getting it to build with later versions is at least hard if not impossible.
+
+Before running node, ensure you've given node access to BL: https://github.com/noble/noble#running-on-linux
+
 ## Setup
 
 Create .env file with following config
